@@ -1,0 +1,5 @@
+src/__pycache__
+src/.env
+
+docker/mysql/data
+docker/mysql/log

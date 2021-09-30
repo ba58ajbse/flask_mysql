@@ -1,0 +1,32 @@
+version: "3"
+
+services:
+  app:
+    build: ./docker/flask
+    container_name: flask_app
+    ports:
+      - "5000:5000"
+    volumes:
+      - "./src:/src"
+    tty: true
+    environment:
+      TZ: "Asia/Tokyo"
+      FLASK_ENV: "development"
+      FLASK_APP: "app.py"
+    depends_on:
+      - db
+    command: "flask run --host=0.0.0.0 --port=5000"
+
+  db:
+    image: mysql:5.7
+    container_name: flask_mysql
+    ports:
+      - 3306:3306
+    volumes:
+      - ./docker/mysql/data:/var/lib/mysql
+      - ./docker/mysql/log/:/var/log/mysql
+      - ./docker/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
+    environment:
+      MYSQL_DATABASE: flask
+      MYSQL_ROOT_PASSWORD: password
+      TZ: Asia/Tokyo
