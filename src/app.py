@@ -3,20 +3,8 @@ from flask import render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin, LoginManager, login_user, logout_user, login_required
 from werkzeug.security import generate_password_hash, check_password_hash
-import os
 from datetime import datetime
-from dotenv import load_dotenv
-
-load_dotenv()
-user = os.getenv('DB_USER')
-password = os.getenv('DB_PASS')
-host = os.getenv('DB_HOST')
-dbname = os.getenv('DB_NAME')
-
-app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = f'mysql+pymysql://{user}:{password}@{host}/{dbname}'
-app.config['SECRET_KEY'] = os.urandom(24)
-db = SQLAlchemy(app)
+from . import app, db
 
 login_manager = LoginManager()
 login_manager.init_app(app)
