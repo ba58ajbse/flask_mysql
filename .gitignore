@@ -4,3 +4,5 @@ src/instance/config/*
 
 docker/mysql/data
 docker/mysql/log
+
+**/__pycache__
