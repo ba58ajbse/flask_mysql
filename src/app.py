@@ -2,7 +2,9 @@ from flask import request, jsonify, abort
 from . import app, db
 from .models.models import Post, posts_schema, post_schema
 from datetime import datetime
+from src.api.posts import api
 
+app.register_blueprint(api)
 
 @app.route('/posts/', methods=['GET'])
 def get_all():

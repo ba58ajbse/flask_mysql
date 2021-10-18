@@ -27,26 +27,3 @@ class PostSchema(ma.Schema):
 
 post_schema = PostSchema()
 posts_schema = PostSchema(many=True)
-
-
-class TaskModel(db.Model):
-	__tablename__ = "tasks"
-
-	id = db.Column(db.Integer, primary_key=True)
-	task = db.Column(db.String(200), nullable=False)
-	completed = db.Column(db.Boolean(), nullable=False, default=False)
-	created_at = db.Column(db.DateTime, nullable=False, default=datetime.now())
-	updated_at = db.Column(db.DateTime, nullable=False, default=datetime.now())
-
-	def __init__(self, task):
-		self.task = task
-
-	def __repr__(self):
-		return '<TaskModel: {}>'.format(self.task)
-
-class TaskSchema(ma.Schema):
-	class Meta:
-		model = TaskModel
-
-	# created_at = fields.DateTime('%Y-%m-%dT%H:%M:%S')
-	# updated_at = fields.DateTime('%Y-%m-%dT%H:%M:%S')
